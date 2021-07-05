@@ -8,41 +8,52 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class MainController extends AbstractController
 {
+
+    /**
+     * @Route("/", name="root")
+     */
+    public function root(): Response
+    {
+        return $this->render('main/root.html.twig', []);
+    }
+
     #[Route('/main', name: 'main')]
     public function index(): Response
     {
+        $userid = $this->getUser()->getId();
+        if($userid)
+        
         
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
         ]);
     }
+
     /**
-     * @Route("/ogrenci/kaydet", name="ogrenci.kaydet")
+     * @Route("/seperate", name="seperate")
      */
-    public function ogrenci_kaydet(Request $request): Response
-    {   
-        $status = 0;
-        $em = $this->getDoctrine()->getManager();
-        $user = new User();
-        $form = $this->createForm(UserType::class,$user);
-        $form = $form->handleRequest($request);
-        $data = $form->getData();
-        if($form->isSubmitted() and $form->isValid()){
-
-            $user->setRoles(["ROLE_USER"]);
-            $em->persist($user);
-            $em->flush();
-            $status = 1;
-
+    public function seperate(): Response
+    {
+        
+        if($this->getUser()->getRoles()[0] == "ROLE_OGRENCI"){
+            return $this->redirectToRoute('ogrenci-main');
         }
-
-        return $this->render('main/ogrenci_kayit.html.twig', [
-            'form' => $form->createView(),
-            'status' => $status,
+        else if($this->getUser()->getRoles()[0] == "ROLE_OGRETMEN"){
+            return $this->redirectToRoute('ogretmen-main');
+        }
+        else if($this->getUser()->getRoles()[0] == "ROLE_YONETICI"){
+            return $this->redirectToRoute('yonetici-main');
+        }
+        
+        return $this->render('main/index.html.twig', [
+            'controller_name' => 'abc'
         ]);
     }
+    
+    
+    
 }

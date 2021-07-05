@@ -3,9 +3,13 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Doctrine\DBAL\Types\TextType;
+
+use Doctrine\DBAL\Types\StringType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
@@ -15,11 +19,16 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('password',PasswordType::class)
-            ->add('email')
-            ->add("kaydet", SubmitType::class,[
-                "label" => "Ogrenci Kaydet!"
+            ->add('password',PasswordType::class,[
+                'label' => 'Sifre'
             ])
+            ->add('email',EmailType::class,[
+                "label" => 'email'
+            ])
+            ->add('Kayit',SubmitType::class,[
+                "label" => "Kaydet!"
+            ])
+            
         ;
     }
 

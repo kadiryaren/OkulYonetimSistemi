@@ -20,49 +20,43 @@ class DersKatologu
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=50)
      */
-    private $ders_adi;
+    private $dersAdi;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $ders_fiyati;
+    private $dersFiyati;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $ogretmen_ucreti;
+    private $ogretmenUcreti;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $hangi_yil_alinabilir;
+    private $hangiSiniftaAlinabilir;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $ders_kredisi;
+    private $dersKredisi;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $ders_gunu;
+    private $dersGunu;
 
     /**
-     * @ORM\ManyToMany(targetEntity=OgrenciDetay::class, inversedBy="ders_listesi")
+     * @ORM\ManyToMany(targetEntity=OgretmenDetay::class, inversedBy="dersKatologus")
      */
-    private $ogrenci_listesi;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=OgretmenDetay::class, mappedBy="ders_listesi")
-     */
-    private $dersHocasi;
+    private $ogretmen;
 
     public function __construct()
     {
-        $this->ogrenci_listesi = new ArrayCollection();
-        $this->dersHocasi = new ArrayCollection();
+        $this->ogretmen = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -72,123 +66,96 @@ class DersKatologu
 
     public function getDersAdi(): ?string
     {
-        return $this->ders_adi;
+        return $this->dersAdi;
     }
 
-    public function setDersAdi(string $ders_adi): self
+    public function setDersAdi(string $dersAdi): self
     {
-        $this->ders_adi = $ders_adi;
+        $this->dersAdi = $dersAdi;
 
         return $this;
     }
 
     public function getDersFiyati(): ?int
     {
-        return $this->ders_fiyati;
+        return $this->dersFiyati;
     }
 
-    public function setDersFiyati(int $ders_fiyati): self
+    public function setDersFiyati(int $dersFiyati): self
     {
-        $this->ders_fiyati = $ders_fiyati;
+        $this->dersFiyati = $dersFiyati;
 
         return $this;
     }
 
     public function getOgretmenUcreti(): ?int
     {
-        return $this->ogretmen_ucreti;
+        return $this->ogretmenUcreti;
     }
 
-    public function setOgretmenUcreti(int $ogretmen_ucreti): self
+    public function setOgretmenUcreti(int $ogretmenUcreti): self
     {
-        $this->ogretmen_ucreti = $ogretmen_ucreti;
+        $this->ogretmenUcreti = $ogretmenUcreti;
 
         return $this;
     }
 
-    public function getHangiYilAlinabilir(): ?int
+    public function getHangiSiniftaAlinabilir(): ?int
     {
-        return $this->hangi_yil_alinabilir;
+        return $this->hangiSiniftaAlinabilir;
     }
 
-    public function setHangiYilAlinabilir(int $hangi_yil_alinabilir): self
+    public function setHangiSiniftaAlinabilir(int $hangiSiniftaAlinabilir): self
     {
-        $this->hangi_yil_alinabilir = $hangi_yil_alinabilir;
+        $this->hangiSiniftaAlinabilir = $hangiSiniftaAlinabilir;
 
         return $this;
     }
 
     public function getDersKredisi(): ?int
     {
-        return $this->ders_kredisi;
+        return $this->dersKredisi;
     }
 
-    public function setDersKredisi(int $ders_kredisi): self
+    public function setDersKredisi(int $dersKredisi): self
     {
-        $this->ders_kredisi = $ders_kredisi;
+        $this->dersKredisi = $dersKredisi;
 
         return $this;
     }
 
     public function getDersGunu(): ?\DateTimeInterface
     {
-        return $this->ders_gunu;
+        return $this->dersGunu;
     }
 
-    public function setDersGunu(\DateTimeInterface $ders_gunu): self
+    public function setDersGunu(\DateTimeInterface $dersGunu): self
     {
-        $this->ders_gunu = $ders_gunu;
+        $this->dersGunu = $dersGunu;
 
         return $this;
     }
 
     /**
-     * @return Collection|OgrenciDetay[]
+     * @return Collection|ogretmenDetay[]
      */
-    public function getOgrenciListesi(): Collection
+    public function getOgretmen(): Collection
     {
-        return $this->ogrenci_listesi;
+        return $this->ogretmen;
     }
 
-    public function addOgrenciListesi(OgrenciDetay $ogrenciListesi): self
+    public function addOgretman(ogretmenDetay $ogretman): self
     {
-        if (!$this->ogrenci_listesi->contains($ogrenciListesi)) {
-            $this->ogrenci_listesi[] = $ogrenciListesi;
+        if (!$this->ogretmen->contains($ogretman)) {
+            $this->ogretmen[] = $ogretman;
         }
 
         return $this;
     }
 
-    public function removeOgrenciListesi(OgrenciDetay $ogrenciListesi): self
+    public function removeOgretman(ogretmenDetay $ogretman): self
     {
-        $this->ogrenci_listesi->removeElement($ogrenciListesi);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|OgretmenDetay[]
-     */
-    public function getDersHocasi(): Collection
-    {
-        return $this->dersHocasi;
-    }
-
-    public function addDersHocasi(OgretmenDetay $dersHocasi): self
-    {
-        if (!$this->dersHocasi->contains($dersHocasi)) {
-            $this->dersHocasi[] = $dersHocasi;
-            $dersHocasi->addDersListesi($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDersHocasi(OgretmenDetay $dersHocasi): self
-    {
-        if ($this->dersHocasi->removeElement($dersHocasi)) {
-            $dersHocasi->removeDersListesi($this);
-        }
+        $this->ogretmen->removeElement($ogretman);
 
         return $this;
     }

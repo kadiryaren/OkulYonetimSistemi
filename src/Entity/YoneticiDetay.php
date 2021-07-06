@@ -37,6 +37,11 @@ class YoneticiDetay
      */
     private $adres;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $yoneticiId;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class YoneticiDetay
     public function setAdres(string $adres): self
     {
         $this->adres = $adres;
+
+        return $this;
+    }
+
+    public function getYoneticiId(): ?int
+    {
+        return $this->yoneticiId;
+    }
+
+    public function setYoneticiId(int $yoneticiId): self
+    {
+        $this->yoneticiId = $yoneticiId;
 
         return $this;
     }

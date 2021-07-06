@@ -45,6 +45,11 @@ class OgrenciDetay
      */
     private $ders_listesi;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $ogrenci_id;
+
     public function __construct()
     {
         $this->ders_listesi = new ArrayCollection();
@@ -128,6 +133,18 @@ class OgrenciDetay
         if ($this->ders_listesi->removeElement($dersListesi)) {
             $dersListesi->removeOgrenciListesi($this);
         }
+
+        return $this;
+    }
+
+    public function getOgrenciId(): ?int
+    {
+        return $this->ogrenci_id;
+    }
+
+    public function setOgrenciId(int $ogrenci_id): self
+    {
+        $this->ogrenci_id = $ogrenci_id;
 
         return $this;
     }

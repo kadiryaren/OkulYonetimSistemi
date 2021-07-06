@@ -20,14 +20,15 @@ class OgretmenDetay
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
-    private $ogretmen_adi;
+    private $ogretmenAdi;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $verilecek_ucret;
+    private $verilecekUcret;
+
 
     /**
      * @ORM\Column(type="string", length=20)
@@ -40,13 +41,18 @@ class OgretmenDetay
     private $adres;
 
     /**
-     * @ORM\ManyToMany(targetEntity=dersKatologu::class, inversedBy="dersHocasi")
+     * @ORM\ManyToMany(targetEntity=DersKatologu::class, mappedBy="ogretmen")
      */
-    private $ders_listesi;
+    private $dersKatologus;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $ogretmenId;
 
     public function __construct()
     {
-        $this->ders_listesi = new ArrayCollection();
+        $this->dersKatologus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -56,27 +62,29 @@ class OgretmenDetay
 
     public function getOgretmenAdi(): ?string
     {
-        return $this->ogretmen_adi;
+        return $this->ogretmenAdi;
     }
 
-    public function setOgretmenAdi(string $ogretmen_adi): self
+    public function setOgretmenAdi(string $ogretmenAdi): self
     {
-        $this->ogretmen_adi = $ogretmen_adi;
+        $this->ogretmenAdi = $ogretmenAdi;
 
         return $this;
     }
 
     public function getVerilecekUcret(): ?int
     {
-        return $this->verilecek_ucret;
+        return $this->verilecekUcret;
     }
 
-    public function setVerilecekUcret(int $verilecek_ucret): self
+    public function setVerilecekUcret(int $verilecekUcret): self
     {
-        $this->verilecek_ucret = $verilecek_ucret;
+        $this->verilecekUcret = $verilecekUcret;
 
         return $this;
     }
+
+
 
     public function getTelefon(): ?string
     {
@@ -103,25 +111,40 @@ class OgretmenDetay
     }
 
     /**
-     * @return Collection|dersKatologu[]
+     * @return Collection|DersKatologu[]
      */
-    public function getDersListesi(): Collection
+    public function getDersKatologus(): Collection
     {
-        return $this->ders_listesi;
+        return $this->dersKatologus;
     }
 
-    public function addDersListesi(dersKatologu $dersListesi): self
+    public function addDersKatologu(DersKatologu $dersKatologu): self
     {
-        if (!$this->ders_listesi->contains($dersListesi)) {
-            $this->ders_listesi[] = $dersListesi;
+        if (!$this->dersKatologus->contains($dersKatologu)) {
+            $this->dersKatologus[] = $dersKatologu;
+            $dersKatologu->addOgretman($this);
         }
 
         return $this;
     }
 
-    public function removeDersListesi(dersKatologu $dersListesi): self
+    public function removeDersKatologu(DersKatologu $dersKatologu): self
     {
-        $this->ders_listesi->removeElement($dersListesi);
+        if ($this->dersKatologus->removeElement($dersKatologu)) {
+            $dersKatologu->removeOgretman($this);
+        }
+
+        return $this;
+    }
+
+    public function getOgretmenId(): ?int
+    {
+        return $this->ogretmenId;
+    }
+
+    public function setOgretmenId(int $ogretmenId): self
+    {
+        $this->ogretmenId = $ogretmenId;
 
         return $this;
     }

@@ -21,17 +21,7 @@ class MainController extends AbstractController
         return $this->render('main/root.html.twig', []);
     }
 
-    #[Route('/main', name: 'main')]
-    public function index(): Response
-    {
-        $userid = $this->getUser()->getId();
-        if($userid)
-        
-        
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
-    }
+    
 
     /**
      * @Route("/seperate", name="seperate")
@@ -48,11 +38,47 @@ class MainController extends AbstractController
         else if($this->getUser()->getRoles()[0] == "ROLE_YONETICI"){
             return $this->redirectToRoute('yonetici-main');
         }
-        
+
         return $this->render('main/index.html.twig', [
             'controller_name' => 'abc'
         ]);
     }
+
+    /**
+     * @Route("/ogrenci", name="ogrenci-main")
+     */
+    public function ogrenci_main_page(): Response
+    {
+        return $this->render('main_pages/ogrenciMain.html.twig', []);
+    }
+
+    /**
+     * @Route("/ogretmen", name="ogretmen-main")
+     */
+    public function ogretmen_main_page(): Response
+    {
+        return $this->render('main_pages/ogretmenMain.html.twig', []);
+    }
+
+    /**
+     * @Route("/yonetici", name="yonetici-main")
+     */
+    public function yonetici_main_page(): Response
+    {
+        return $this->render('main_pages/yoneticiMain.html.twig', []);
+    }
+
+    /**
+     * @Route("/yonetici-istatistikler", name="yonetici.istatistikler")
+     */
+    public function yoneticiIstatistikler(): Response
+    {
+        return $this->render('main/yoneticiIstatistik.html.twig',[
+            
+        ]);
+    }
+
+
     
     
     

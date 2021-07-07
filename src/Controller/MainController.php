@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\DersKatologu;
 use App\Entity\OgrenciDetay;
 use App\Entity\OgretmenDetay;
 use App\Entity\User;
 use App\Entity\YoneticiDetay;
+use App\Form\DersEkleType;
 use App\Form\UserType;
 use App\Repository\OgrenciDetayRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -120,6 +122,44 @@ class MainController extends AbstractController
         $tum_yoneticiler = $this->getDoctrine()->getRepository(YoneticiDetay::class)->findAll();
         return $this->render('main/yoneticileriGor.html.twig', [
             'yoneticiler' => $tum_yoneticiler
+        ]);
+    }
+
+    /**
+     * @Route("/ders-ekle", name="ders.ekle")
+     */
+    public function dersEkle(Request $request): Response
+    {   
+        $em = $this->getDoctrine()->getManager();
+        $ders = new DersKatologu();
+        $form = $this->createForm(DersEkleType::class,$ders);
+        $form->handleRequest($request);
+        if($form->isSubmitted() and $form->isValid()){
+            $ders->setDersAdi($form->get('dersAdi')->getData());
+            $ders->setDersFiyati($form->get('dersFiyati')->getData());
+            $ders->setOgretmenUcreti($form->get('ogretmenUcreti')->getData());
+            $ders->setHangiSiniftaAlinabilir($form->get('hangiSiniftaAlinabilir')->getData());
+            $ders->setDersKredisi($form->get('dersKredisi')->getData());
+            $ders->setDersGunu($form->get('dersGunu')->getData());
+            $em->persist($ders);
+            $em->flush();
+
+        }
+
+
+        return $this->render('register/index.html.twig', [
+            'form' => $form->createView(),
+            'title' => "Ders Ekleme Formu"
+        ]);
+    }
+    /**
+     * @Route("/dersleri-gor", name="dersleri.gor")
+     */
+    public function dersleriGor(): Response
+    {
+        $dersler = $this->getDoctrine()->getRepository(DersKatologu::class)->findAll();
+        return $this->render('main/dersleriGor.html.twig', [
+            'dersler' => $dersler
         ]);
     }
 

@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ogrenciler{% endblock %}
+{% block body %}
+
+{% if dersler %}
+
+<div class="d-flex flex-column justify-content-center align-items-center mt-5 mb-3">
+<div class="align-self-center"><h1>Kayitli Ogrenciler</h1></div>
+    <div style="width:90%;height:auto;">
+        <table id="table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>
+                        Ders ID
+                    </td>
+                    <td>
+                        Ders Adi
+                    </td>
+                    <td>
+                        Ders Fiyati
+                    </td>
+                    <td>
+                        Ogretmen Ucreti
+                    </td>
+                    <td>
+                        Hangi Sinifta Alinabilir
+                    </td>
+                    <td>
+                        Ders Kredisi
+                    </td>
+                    <td>
+                        Ders Gunu
+                    </td>
+                <tr>
+            </thead>
+            <tbody>
+                {% for ders in dersler %}
+                    <tr>
+                        <td>
+                            {{ ders.getId() }}
+                            
+                        </td>
+                        <td>
+                            {{ ders.dersAdi() }}
+                        </td>
+                        <td>
+                            {{ ders.DersFiyati }}
+                        </td>
+                        <td>
+                            {{ ders.ogretmenUcreti }}
+                        </td>
+                    
+                        <td>
+                            {{ ders.hangiSiniftaAlinabilir }}
+                        </td>
+                        <td>
+                            {{ ders.dersKredisi }}
+                        </td>
+                        <td>
+                            {{ ders.dersGunu|date("Y/m/d") }}
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    
+        $(function(){
+            $("#table").DataTable({
+                "paging":   true,
+            });
+        });
+    </script>
+
+
+{% endif %}
+
+
+{% endblock %}
+{% block script  %}
+
+    
+
+{% endblock %}

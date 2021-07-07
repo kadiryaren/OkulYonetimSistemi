@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ogrenciler{% endblock %}
+{% block body %}
+
+{% if ogrenciler %}
+
+<div class="d-flex flex-column justify-content-center align-items-center mt-5 mb-3">
+<div class="align-self-center"><h1>Kayitli Ogrenciler</h1></div>
+    <div style="width:90%;height:auto;">
+        <table id="table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>
+                        Ogrenci Id
+                    </td>
+                    <td>
+                        Ogrenci Adi
+                    </td>
+                    <td>
+                        Username
+                    </td>
+                    <td>
+                        Email
+                    </td>
+                    <td>
+                        Telefon
+                    </td>
+                    <td>
+                        Adres
+                    </td>
+                    <td>
+                        Kredi
+                    </td>
+                <tr>
+            </thead>
+            <tbody>
+                {% for ogrenci in ogrenciler %}
+                    <tr>
+                        <td>
+                            {{ ogrenci.getOgrenciId() }}
+                            
+                        </td>
+                        <td>
+                            {{ ogrenci.getOgrenciAdi() }}
+                        </td>
+                        <td>
+                            {{ ogrenci.username }}
+                        </td>
+                        <td>
+                            {{ ogrenci.email }}
+                        </td>
+                    
+                        <td>
+                            {{ ogrenci.telefon }}
+                        </td>
+                        <td>
+                            {{ ogrenci.adres }}
+                        </td>
+                        <td>
+                            {{ ogrenci.kredi }}
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    
+        $(function(){
+            $("#table").DataTable({
+                "paging":   true,
+            });
+        });
+    </script>
+
+
+{% endif %}
+
+
+{% endblock %}
+{% block script  %}
+
+    
+
+{% endblock %}

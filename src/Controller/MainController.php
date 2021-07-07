@@ -2,13 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\OgrenciDetay;
+use App\Entity\OgretmenDetay;
 use App\Entity\User;
+use App\Entity\YoneticiDetay;
 use App\Form\UserType;
+use App\Repository\OgrenciDetayRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Faker\Factory;
 
 class MainController extends AbstractController
 {
@@ -65,6 +70,7 @@ class MainController extends AbstractController
      */
     public function yonetici_main_page(): Response
     {
+        dump($this->getDoctrine()->getRepository(OgrenciDetay::class)->findAll());
         return $this->render('main_pages/yoneticiMain.html.twig', []);
     }
 
@@ -73,8 +79,47 @@ class MainController extends AbstractController
      */
     public function yoneticiIstatistikler(): Response
     {
+       
         return $this->render('main/yoneticiIstatistik.html.twig',[
-            
+
+        ]);
+    }
+
+    /**
+     * @Route("/ogrencileri-gor", name="ogrencileri.gor")
+     */
+    public function ogrencileriGor(): Response
+    {   
+        $tum_ogrenciler = $this->getDoctrine()->getRepository(OgrenciDetay::class)->findAll();
+        
+        $faker = Factory::create();
+
+        dump($faker->firstName);
+        
+        return $this->render('main/ogrencileriGor.html.twig', [
+            'ogrenciler' => $tum_ogrenciler,
+        ]);
+    }
+
+    /**
+     * @Route("/ogretmenleri-gor", name="ogretmenleri.gor")
+     */
+    public function ogretmenleriGor(): Response
+    {
+        $tum_ogretmenler = $this->getDoctrine()->getRepository(OgretmenDetay::class)->findAll();
+        return $this->render('main/ogretmenleriGor.html.twig', [
+            'ogretmenler' => $tum_ogretmenler
+        ]);
+    }
+
+    /**
+     * @Route("/yoneticileri-gor", name="yoneticileri.gor")
+     */
+    public function yoneticileriGor(): Response
+    {
+        $tum_yoneticiler = $this->getDoctrine()->getRepository(YoneticiDetay::class)->findAll();
+        return $this->render('main/yoneticileriGor.html.twig', [
+            'yoneticiler' => $tum_yoneticiler
         ]);
     }
 

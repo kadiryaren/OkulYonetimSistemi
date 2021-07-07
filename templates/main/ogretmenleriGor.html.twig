@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ogretmenler{% endblock %}
+{% block body %}
+
+{% if ogretmenler %}
+
+<div class="d-flex flex-column justify-content-center align-items-center mt-5 mb-3">
+<div class="align-self-center"><h1>Kayitli Ogretmenler</h1></div>
+    <div style="width:70%;height:auto;">
+        <table id="dataTable" class="table table-bordered" data-page-length='10'>
+            <thead>
+                <tr>
+                    <td>
+                        Ogretmen ID
+                    </td>
+                    <td>
+                        Ogretmen Adi
+                    </td>
+                    <td>
+                        Username
+                    </td>
+                    <td>
+                        Email
+                    </td>
+                    <td>
+                        Telefon
+                    </td>
+                    <td>
+                        Adres
+                    </td>
+                    <td>
+                        Verilecek Ucret
+                    </td>
+                <tr>
+            </thead>
+            <tbody>
+                {% for ogretmen in ogretmenler %}
+                    <tr>
+                        <td>
+                            {{ ogretmen.getOgretmenId() }}
+                            
+                        </td>
+                        <td>
+                            {{ ogretmen.ogretmenAdi }}
+                        </td>
+                        <td>
+                            {{ ogretmen.username }}
+                        </td>
+                        <td>
+                            {{ ogretmen.email }}
+                        </td>
+                    
+                        <td>
+                            {{ ogretmen.telefon }}
+                        </td>
+                        <td>
+                            {{ ogretmen.adres }}
+                        </td>
+                        <td>
+                            {{ ogretmen.verilecekUcret }}
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        } );
+    </script>
+
+
+{% endif %}
+
+
+{% endblock %}
+{% block script  %}
+
+    
+
+{% endblock %}

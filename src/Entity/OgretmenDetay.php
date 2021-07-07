@@ -50,6 +50,21 @@ class OgretmenDetay
      */
     private $ogretmenId;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $username;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
     public function __construct()
     {
         $this->dersKatologus = new ArrayCollection();
@@ -145,6 +160,42 @@ class OgretmenDetay
     public function setOgretmenId(int $ogretmenId): self
     {
         $this->ogretmenId = $ogretmenId;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }

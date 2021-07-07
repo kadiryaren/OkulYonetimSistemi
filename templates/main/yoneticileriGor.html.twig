@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Yoneticiler{% endblock %}
+{% block body %}
+
+{% if yoneticiler %}
+
+<div class="d-flex flex-column justify-content-center align-items-center mt-5 mb-3">
+<div class="align-self-center"><h1>Kayitli Yoneticiler</h1></div>
+    <div style="width:70%;height:auto;">
+        <table id="table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>
+                        Yonetici ID
+                    </td>
+                    <td>
+                        Yonetici Adi
+                    </td>
+                    <td>
+                        Username
+                    </td>
+                    <td>
+                        Email
+                    </td>
+                    <td>
+                        Telefon
+                    </td>
+                    <td>
+                        Adres
+                    </td>
+                    <td>
+                        Verilecek Ucret
+                    </td>
+                <tr>
+            </thead>
+            <tbody>
+                {% for yonetici in yoneticiler %}
+                    <tr>
+                        <td>
+                            {{ yonetici.getYoneticiId() }}
+                            
+                        </td>
+                        <td>
+                            {{ yonetici.yoneticiAdi }}
+                        </td>
+                        <td>
+                            {{ yonetici.username }}
+                        </td>
+                        <td>
+                            {{ yonetici.email }}
+                        </td>
+                    
+                        <td>
+                            {{ yonetici.telefon }}
+                        </td>
+                        <td>
+                            {{ yonetici.adres }}
+                        </td>
+                        <td>
+                            {{ yonetici.verilecekUcret }}
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    
+        $(function(){
+            $("#table").DataTable({
+                "iDisplayLength": 10,
+            });
+        });
+    </script>
+
+
+{% endif %}
+
+
+{% endblock %}
+{% block script  %}
+
+    
+
+{% endblock %}

@@ -27,7 +27,7 @@ class UserSecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-             return $this->redirectToRoute('root');
+             return $this->redirectToRoute('seperate');
         }
 
         // get the login error if there is one
@@ -65,6 +65,14 @@ class UserSecurityController extends AbstractController
             );
             $user->setRoles(["ROLE_USER"]);
             $user->setEmail($form->get('email')->getData());
+            $ogrenci->setUsername($form->get("username")->getData());
+            $ogrenci->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get("password")->getData()
+                )
+            );
+            $ogrenci->setEmail($form->get('email')->getData());
             
             $ogrenci->setOgrenciAdi($form->get('ogrenci_adi')->getData());
             $ogrenci->setTelefon($form->get('telefon')->getData());
@@ -115,7 +123,14 @@ class UserSecurityController extends AbstractController
             );
             $user->setRoles(["ROLE_OGRETMEN"]);
             $user->setEmail($form->get('email')->getData());
-
+            $ogretmen->setUsername($form->get("username")->getData());
+            $ogretmen->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get("password")->getData()
+                )
+            );
+            $ogretmen->setEmail($form->get('email')->getData());
             $ogretmen->setOgretmenAdi($form->get('ogretmen_adi')->getData());
             $ogretmen->setVerilecekUcret($form->get('verilecek_ucret')->getData());
             $ogretmen->setTelefon($form->get('telefon')->getData());
@@ -183,6 +198,14 @@ class UserSecurityController extends AbstractController
             $user->setRoles(["ROLE_YONETICI"]);
             $user->setEmail($form->get('email')->getData());
 
+            $yonetici->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get("password")->getData()
+                )
+            );
+            $yonetici->setEmail($form->get('email')->getData());
+            $yonetici->setUsername($form->get("username")->getData());
            $yonetici->setYoneticiAdi($form->get('yoneticiAdi')->getData());
            $yonetici->setVerilecekUcret($form->get('verilecekUcret')->getData());
            $yonetici->setTelefon($form->get('telefon')->getData());

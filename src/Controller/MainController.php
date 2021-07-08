@@ -185,11 +185,13 @@ class MainController extends AbstractController
     {
         @$dersler = $this->getDoctrine()->getRepository(DersKatologu::class)->findAll();
         @$ogretmen = $this->getDoctrine()->getRepository(OgretmenDetay::class)->findOneBy(["ogretmenId" => $this->getUser()->getId()]);
+        
         $ogrenci = $this->getDoctrine()->getRepository(OgrenciDetay::class)->findOneBy(["ogrenci_id" => $this->getUser()->getId()]);
+        dump($ogrenci);
         return $this->render('main/dersleriGor.html.twig', [
             'dersler' => $dersler,
-            'ogretmen' => $ogretmen,
-            'ogrenci' => $ogrenci
+            'ogretmen' => @$ogretmen,
+            'ogrenci' => @$ogrenci
         ]);
     }
     /**
@@ -206,6 +208,7 @@ class MainController extends AbstractController
             $ogretmen->removeDersKatologu($ders);
             $em->persist($ogretmen);
             $em->flush();
+
             return $this->redirectToRoute("ogretmen.dersleri.gor");
 
         }else{
@@ -214,6 +217,33 @@ class MainController extends AbstractController
         
         
         
+    }
+    /**
+     * @Route("ogrenci/dersten-ayril/{dersid}", name="ogrenci.dersten-ayril")
+     */
+    public function ogrenciDerstenAyril($dersid): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $ogrencimiz = $this->getDoctrine()->getRepository(OgrenciDetay::class)->findOneBy(["ogrenci_id" => $this->getUser()->getId()]);
+        $ogrencimiz->removeAlinanDersListesi($this->getDoctrine()->getRepository(DersKatologu::class)->find($dersid));
+        $em->persist($ogrencimiz);
+        $em->flush();
+
+        return $this->redirectToRoute("ogrenci.dersleri.gor");
+    }
+
+    /**
+     * @Route("ogrenci/derse-katil/{dersid}", name="ogrenci.derse-katil")
+     */
+    public function ogrenciDerseKatil($dersid): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $ogrencimiz = $this->getDoctrine()->getRepository(OgrenciDetay::class)->findOneBy(["ogrenci_id" => $this->getUser()->getId()]);
+        $ogrencimiz->addAlinanDersListesi($this->getDoctrine()->getRepository(DersKatologu::class)->find($dersid));
+        $em->persist($ogrencimiz);
+        $em->flush();
+
+        return $this->redirectToRoute("ogrenci.dersleri.gor");
     }
     /**
      * @Route("/ogretmen/derste-katil/{id}", name="ogretmen.derseKatil")

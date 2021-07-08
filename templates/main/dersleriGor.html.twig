@@ -72,6 +72,67 @@
                         <td>
                             {{ ders.dersGunu|date("Y/m/d") }}
                         </td>
+                        
+                        {% if is_granted("ROLE_OGRENCI") %}
+                            <td>
+                            {% for hoca in ders.getOgretmen() %}
+                                {% if hoca != ogretmen %}
+                                    ,{{ hoca.username }}
+                                {% endif %}
+                                
+                            
+                            {% endfor %}
+                            </td>
+                            {% if ogrenciderseAidiyetKontrol(ders.getOgrenci(),ogrenci) %}
+                                <td>
+                                    <h5><span class="badge badge-warning">Siz</span></h5>
+                                    {% for forOgrenci in  ders.getOgrenci() %}
+                                        {% if forOgrenci != ogrenci %}
+                                            ,{{ forOgrenci.username }}
+                                        {% endif %}
+                                        
+                                    {% endfor %}
+                                </td>
+                            {% else %}
+                        {% if ders.getOgrenci()|length > 0 %}
+                            <td>
+                                {% for forOgrenci in  ders.getOgrenci() %}
+                                        
+                                            ,{{ forOgrenci.username }}
+                                {% endfor %}
+                            </td>
+                            {% else %}
+                            <td>
+                                Derse kayitli ogrenci yok!
+                            </td>
+                            {% endif %}
+
+
+                        
+
+                            {% endif %}
+                            {% if  ogrenciderseAidiyetKontrol(ders.getOgrenci(),ogrenci) %}
+                                {# Ders Silme linki #}
+                                <td>
+                                <a class="btn btn-sm btn-outline-danger" href="{{ path('ogrenci.dersten-ayril',{dersid:ders.getId()}) }}">Dersten Ayril</a>
+                                </td>
+                            {% else %}
+                                {# Ders Ekleme linki #}
+                                <td>
+                                {% if not  ders.getOgretmen()|length > 0  %}
+                                    <h5><span class="badge badge-danger">Derse Katilamazsiniz!</span></h5>
+                                    {% else %}
+                                    <a class="btn btn-sm btn-outline-success" href="{{ path('ogrenci.derse-katil',{dersid:ders.getId()}) }}">Katil</a>
+                                {% endif %}
+                                
+                                </td>
+                            {% endif %}
+                            
+                            
+
+
+                        {% endif %}
+
                        
                         {% if is_granted("ROLE_OGRETMEN") %}
                             {% if derseAidiyetKontrol(ders.getOgretmen(),ogretmen) == true %}
@@ -84,6 +145,20 @@
                                         
                                     {% endfor %}
                                 </td>
+                                {% if ders.getOgrenci()|length > 0 %}
+                                    <td>
+                                        {% for forOgrenci in  ders.getOgrenci() %}
+                                                
+                                                    ,{{ forOgrenci.username }}
+                                        {% endfor %}
+                                    </td>
+                                    {% else %}
+                                    <td>
+                                        Derse kayitli ogrenci yok!
+                                    </td>
+                                {% endif %}
+                                
+                                
                                 <td>
                                     <h4><span class="badge badge-info">Derse Aitsiniz</span></h4>
                                     <a class="btn btn-sm btn-outline-dark" href="{{ path('ogretmen.derstenAyril',{id:ders.getId()}) }}">Dersten Ayril</a>
@@ -95,19 +170,27 @@
                                         {{ hoca.username }},
                                     {% endfor %}
                                 </td>
+                                {% if ders.getOgrenci()|length > 0 %}
+                                    <td>
+                                        {% for forOgrenci in  ders.getOgrenci() %}
+                                                
+                                                    ,{{ forOgrenci.username }}
+                                        {% endfor %}
+                                    </td>
+                                    {% else %}
+                                    <td>
+                                        Derse kayitli ogrenci yok!
+                                    </td>
+                                {% endif %}
                                 <td>
                                      <a class="btn btn-sm btn-outline-warning" href="{{ path('ogretmen.derseKatil',{id:ders.getId()}) }}">Derse Katil</a>
                                 </td>
                             {% endif %}
-                            <td>
-                            {% if ders.getOgrenci()|length > 0 %}
-                                <a class="btn btn-sm btn-outline-primary" href="{{ path() }}">Ogrencileri Gor</a>
-                            {% else %}
-                                    Derse Kayitli Ogrenci Yok.
-                            {% endif %}
-                        </td>
+                            
                            
                         {% endif %}
+                        
+                        
                          
 
                     </tr>

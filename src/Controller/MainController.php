@@ -209,6 +209,17 @@ class MainController extends AbstractController
             $em->persist($ogretmen);
             $em->flush();
 
+            if(!count($ders->getOgretmen()->getValues()) > 0 ){
+                if(count($ders->getOgrenci()->getValues()) > 0 ){
+                    for($i = 0 ; $i < count($ders->getOgrenci()->getValues()) ; $i++){
+                        $ders->removeOgrenci($ders->getOgrenci()->getValues()[$i]);
+                    }
+                    $em->persist($ders);
+                    $em->flush();
+                    
+                }
+            }
+
             return $this->redirectToRoute("ogretmen.dersleri.gor");
 
         }else{
@@ -225,6 +236,7 @@ class MainController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $ogrencimiz = $this->getDoctrine()->getRepository(OgrenciDetay::class)->findOneBy(["ogrenci_id" => $this->getUser()->getId()]);
+        $ogrencimiz->setKredi($ogrencimiz->getKredi() +  $this->getDoctrine()->getRepository(DersKatologu::class)->find($dersid)->getDersKredisi());
         $ogrencimiz->removeAlinanDersListesi($this->getDoctrine()->getRepository(DersKatologu::class)->find($dersid));
         $em->persist($ogrencimiz);
         $em->flush();
@@ -239,9 +251,17 @@ class MainController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $ogrencimiz = $this->getDoctrine()->getRepository(OgrenciDetay::class)->findOneBy(["ogrenci_id" => $this->getUser()->getId()]);
-        $ogrencimiz->addAlinanDersListesi($this->getDoctrine()->getRepository(DersKatologu::class)->find($dersid));
-        $em->persist($ogrencimiz);
-        $em->flush();
+        if($ogrencimiz->getKredi() > $this->getDoctrine()->getRepository(DersKatologu::class)->find($dersid)->getDersKredisi())
+        {
+            $ogrencimiz->addAlinanDersListesi($this->getDoctrine()->getRepository(DersKatologu::class)->find($dersid));
+            $ogrencimiz->setKredi($ogrencimiz->getKredi() - $this->getDoctrine()->getRepository(DersKatologu::class)->find($dersid)->getDersKredisi() );
+
+            $em->persist($ogrencimiz);
+            $em->flush();
+        }
+        
+        
+       
 
         return $this->redirectToRoute("ogrenci.dersleri.gor");
     }

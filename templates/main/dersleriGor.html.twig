@@ -25,6 +25,10 @@
 <div class="d-flex flex-column justify-content-center align-items-center mt-5">
     <div style="width:70%;">
     <center><h1>Kayitli Dersler</h1></center>
+    {% if is_granted("ROLE_OGRENCI") %}
+        <center><h3>Kalan Kredi {{ ogrenci.getKredi() }}</h3></center>
+    {% endif %}
+    
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>

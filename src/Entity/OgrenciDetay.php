@@ -40,10 +40,7 @@ class OgrenciDetay
     private $kredi;
 
 
-    /**
-     * @ORM\ManyToMany(targetEntity=DersKatologu::class, mappedBy="ogrenci_listesi")
-     */
-    private $ders_listesi;
+
 
     /**
      * @ORM\Column(type="integer")
@@ -65,9 +62,15 @@ class OgrenciDetay
      */
     private $username;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=DersKatologu::class, mappedBy="ogrenci")
+     */
+    private $alinanDersListesi;
+
     public function __construct()
     {
         $this->ders_listesi = new ArrayCollection();
+        $this->alinanDersListesi = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,34 +126,6 @@ class OgrenciDetay
         return $this;
     }
 
-   
-
-    /**
-     * @return Collection|DersKatologu[]
-     */
-    public function getDersListesi(): Collection
-    {
-        return $this->ders_listesi;
-    }
-
-    public function addDersListesi(DersKatologu $dersListesi): self
-    {
-        if (!$this->ders_listesi->contains($dersListesi)) {
-            $this->ders_listesi[] = $dersListesi;
-            $dersListesi->addOgrenciListesi($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDersListesi(DersKatologu $dersListesi): self
-    {
-        if ($this->ders_listesi->removeElement($dersListesi)) {
-            $dersListesi->removeOgrenciListesi($this);
-        }
-
-        return $this;
-    }
 
     public function getOgrenciId(): ?int
     {
@@ -196,6 +171,33 @@ class OgrenciDetay
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DersKatologu[]
+     */
+    public function getAlinanDersListesi(): Collection
+    {
+        return $this->alinanDersListesi;
+    }
+
+    public function addAlinanDersListesi(DersKatologu $alinanDersListesi): self
+    {
+        if (!$this->alinanDersListesi->contains($alinanDersListesi)) {
+            $this->alinanDersListesi[] = $alinanDersListesi;
+            $alinanDersListesi->addOgrenci($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlinanDersListesi(DersKatologu $alinanDersListesi): self
+    {
+        if ($this->alinanDersListesi->removeElement($alinanDersListesi)) {
+            $alinanDersListesi->removeOgrenci($this);
+        }
 
         return $this;
     }

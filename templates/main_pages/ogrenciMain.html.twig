@@ -6,8 +6,13 @@
 
 <center><h2>Ogrenci Olarak Giris Yaptiniz</h2></center>
 <br>
-<center><a class="btn btn-outline-danger" href="/logout">Cikis Yap</a> </center>
-<center><a class="btn btn-outline-info" href="/ogrenci-bilgileri">Ogrenci Bilgileri</a></center>
+
+<center><a class="btn btn-outline-info" href="{{ path('ogrenci.account') }}">Ogrenci Bilgileri</a></center>
+<br>
+<center><a class="btn btn-outline-info" href="{{ path('ogrenci.dersleri.gor') }}">Ders Ekle/Sil</a></center>
+<br>
+<center><a class="btn btn-outline-danger" href="{{ path('app_logout') }}">Cikis Yap</a> </center>
+
 
 <ul>
     <li><h3>Fonksiyonlar</h3></li>

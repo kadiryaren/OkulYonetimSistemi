@@ -7,13 +7,14 @@
 
 <center><h2>Yonetici Olarak Giris Yaptiniz</h2></center>
 <br>
-<center><a class="btn btn-outline-success m-4" href="/ogrencileri-gor">Ogrencileri Gor</a></center>
-<center><a class="btn btn-outline-info m-4" href="/ogretmenleri-gor">Ogretmenleri Gor</a></center>
-<center><a class="btn btn-outline-success m-4" href="/yoneticileri-gor">Yoneticileri Gor</a></center>
-<center><a class="btn btn-outline-primary m-4" href="/dersleri-gor">Dersleri Gor</a></center>
-<center><a class="btn btn-outline-secondary m-4" href="/ders-ekle">Ders Ekle</a></center>
-<center><a class="btn btn-outline-warning m-4" href="/ogretmen-kayit">Ogretmen Ekle</a></center>
-<center><a class="btn btn-outline-danger m-4" href="/yonetici-kayit">Yonetici Ekle</a></center>
-<center><a class="btn btn-outline-danger m-4" href="/logout">Cikis Yap</a> </center>
+<center><a class="btn btn-outline-secondary m-4" href="{{ path('yonetici.account') }}">Kullanici Bilgileri</a></center>
+<center><a class="btn btn-outline-success m-4" href="{{ path('yonetici.ogrencileri.gor') }}">Ogrencileri Gor</a></center>
+<center><a class="btn btn-outline-info m-4" href="{{ path('ogretmenleri.gor') }}">Ogretmenleri Gor</a></center>
+<center><a class="btn btn-outline-success m-4" href="{{ path('yoneticileri.gor') }}">Yoneticileri Gor</a></center>
+<center><a class="btn btn-outline-primary m-4" href="{{ path('yonetici.dersleri.gor') }}">Dersleri Gor</a></center>
+<center><a class="btn btn-outline-secondary m-4" href="{{ path('ders.ekle') }}">Ders Ekle</a></center>
+<center><a class="btn btn-outline-warning m-4" href="{{ path('ogretmen.kayit') }}">Ogretmen Ekle</a></center>
+<center><a class="btn btn-outline-danger m-4" href="/{{ path('yonetici.kayit') }}">Yonetici Ekle</a></center>
+<center><a class="btn btn-outline-danger m-4" href="{{ path('app_logout') }}">Cikis Yap</a> </center>
 
 {% endblock %}

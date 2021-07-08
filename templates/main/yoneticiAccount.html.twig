@@ -1,20 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ogretmenler{% endblock %}
+{% block title %}Ogrenciler{% endblock %}
 {% block body %}
 
-{% if ogretmenler %}
+<style>
+    .homepage-button{
+        position:absolute;
+        top:3vh;
+        left: 3vw;
+    }
 
+</style>
+{% if dersler %}
+{% if is_granted("ROLE_OGRETMEN") %}
+    <a class="btn btn-primary homepage-button" href="{{ path('ogretmen-main') }}">Ana Sayfa</a>
+{% endif %}
+{% if is_granted("ROLE_OGRENCI") %}
+    <a class="btn btn-primary homepage-button" href="{{ path('ogrenci-main') }}">Ana Sayfa</a>
+{% endif %}
+{% if is_granted("ROLE_YONETICI") %}
+    <a class="btn btn-primary homepage-button" href="{{ path('yonetici-main') }}">Ana Sayfa</a>
+{% endif %}
 
+{% if yonetici %}
 
     <div class="d-flex flex-column justify-content-center align-items-center mt-5">
+    <h1>Kullanici Hesap Detaylari</h1>
     <div style="width:70%;">
-    <center><h1>Kayitli Ogretmenler</h1></center>
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
-                    <th>Ogretmen ID</th>
-                    <th>Ogretmen Adi</th>
+                    <th>Yonetici Id</th>
+                    <th>Yonetici Adi</th>
                     <th>Username</th>
                     <th>Email</th>
                     <th>Telefon</th>
@@ -23,39 +40,37 @@
             </tr>
         </thead>
         <tbody>
-           {% for ogretmen in ogretmenler %}
-                    <tr>
+            <tr>
                         <td>
-                            {{ ogretmen.getOgretmenId() }}
+                            {{ yonetici.id }}
                             
                         </td>
                         <td>
-                            {{ ogretmen.ogretmenAdi }}
+                            {{ yonetici.getYoneticiAdi() }}
                         </td>
                         <td>
-                            {{ ogretmen.username }}
+                            {{ yonetici.username }}
                         </td>
                         <td>
-                            {{ ogretmen.email }}
+                            {{ yonetici.email }}
                         </td>
                     
                         <td>
-                            {{ ogretmen.telefon }}
+                            {{ yonetici.telefon }}
                         </td>
                         <td>
-                            {{ ogretmen.adres }}
+                            {{ yonetici.adres }}
                         </td>
                         <td>
-                            {{ ogretmen.verilecekUcret }}
+                            {{ yonetici.getVerilecekUcret() }}
                         </td>
                         
                     </tr>
-                {% endfor %}
         </tbody>
         <tfoot>
             <tr>
-                    <th>Ogretmen ID</th>
-                    <th>Ogretmen Adi</th>
+                    <th>Yonetici Id</th>
+                    <th>Yonetici Adi</th>
                     <th>Username</th>
                     <th>Email</th>
                     <th>Telefon</th>
@@ -64,7 +79,7 @@
             </tr>
         </tfoot>
     </table>
-    </div>
+     </div>
 </div>
 
 
@@ -74,7 +89,6 @@ $(document).ready(function() {
     $('#example').DataTable();
 } );
 </script>
-
 
 
 {% endif %}

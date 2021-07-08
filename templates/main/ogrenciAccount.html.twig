@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ogrenci Bilgisi{% endblock %}
+{% block body %}
+<style>
+    .homepage-button{
+        position:absolute;
+        top:3vh;
+        left: 3vw;
+    }
+
+</style>
+
+{% if is_granted("ROLE_OGRETMEN") %}
+    <a class="btn btn-primary homepage-button" href="{{ path('ogretmen-main') }}">Ana Sayfa</a>
+{% endif %}
+{% if is_granted("ROLE_OGRENCI") %}
+    <a class="btn btn-primary homepage-button" href="{{ path('ogrenci-main') }}">Ana Sayfa</a>
+{% endif %}
+{% if is_granted("ROLE_YONETICI") %}
+    <a class="btn btn-primary homepage-button" href="{{ path('yonetici-main') }}">Ana Sayfa</a>
+{% endif %}
+
+{% if ogrenci %}
+
+<div class="d-flex flex-column justify-content-center align-items-center mt-5">
+    <h1>Ogrenci Detaylari</h1>
+    <div style="width:70%;">
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                    <th>Ogrenci Id</th>
+                    <th>Ogrenci Adi</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Telefon</th>
+                    <th>Adres</th>
+                    <th>Kredi</th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr>
+                <td>
+                    {{ ogrenci.getOgrenciId() }}
+                    
+                </td>
+                <td>
+                    {{ ogrenci.getOgrenciAdi() }}
+                </td>
+                <td>
+                    {{ ogrenci.username }}
+                </td>
+                <td>
+                    {{ ogrenci.email }}
+                </td>
+            
+                <td>
+                    {{ ogrenci.telefon }}
+                </td>
+                <td>
+                    {{ ogrenci.adres }}
+                </td>
+                <td>
+                    {{ ogrenci.kredi }}
+                </td>
+                        
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Ogrenci Id</th>
+                    <th>Ogrenci Adi</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Telefon</th>
+                    <th>Adres</th>
+                    <th>Kredi</th>
+            </tr>
+        </tfoot>
+    </table>
+     </div>
+</div>
+
+
+<script>
+
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+
+
+{% endif %}
+
+
+{% endblock %}

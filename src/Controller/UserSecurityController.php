@@ -46,7 +46,7 @@ class UserSecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route('/ogrenci-kayit', name: 'ogrenci-kayit')]
+    #[Route('/yonetici/ogrenci-kayit', name: 'ogrenci-kayit')]
     public function ogrenciKayit(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $em = $this->getDoctrine()->getManager();
@@ -101,7 +101,7 @@ class UserSecurityController extends AbstractController
         ]);
     }
     /**
-     * @Route("/ogretmen-kayit", name="ogretmen-kayit")
+     * @Route("/yonetici/ogretmen-kayit", name="ogretmen.kayit")
      */
     public function ogretmenKayit(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -150,32 +150,9 @@ class UserSecurityController extends AbstractController
             'title' => "Ogretmen Kayit Formu"
         ]);
     }
-    /**
-     * @Route("/ders-kayit", name="ders-kayit")
-     */
-    public function dersKayit(Request $request): Response
-    {
-
-        $ders_katologu = new DersKatologu();
-
-
-        $form = $this->createForm(DersKatologuFormType::class,$ders_katologu);
-        $em = $this->getDoctrine()->getManager();
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() and $form->isValid()){
-            dump($ders_katologu);
-            $em->persist($ders_katologu);
-            $em->flush();
-        }
     
-        return $this->render('register/index.html.twig', [
-            'form' => $form->createView(),
-            'title' => "Ders Kayit Formu"
-        ]);
-    }
     /**
-     * @Route("/yonetici-kayit", name="yonetici-kayit")
+     * @Route("/yonetici/yonetici-kayit", name="yonetici.kayit")
      */
     public function yoneticiKayit(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {

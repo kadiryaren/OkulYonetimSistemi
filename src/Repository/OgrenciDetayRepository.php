@@ -19,6 +19,8 @@ class OgrenciDetayRepository extends ServiceEntityRepository
         parent::__construct($registry, OgrenciDetay::class);
     }
 
+  
+
     // /**
     //  * @return OgrenciDetay[] Returns an array of OgrenciDetay objects
     //  */

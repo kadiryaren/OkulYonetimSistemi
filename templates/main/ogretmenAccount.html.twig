@@ -2,7 +2,7 @@
 
 {% block title %}Ogrenciler{% endblock %}
 {% block body %}
- <style>
+    <style>
         .homepage-button{
             position:absolute;
             top:3vh;
@@ -21,62 +21,68 @@
         <a class="btn btn-primary homepage-button" href="{{ path('yonetici-main') }}">Ana Sayfa</a>
     {% endif %}
 
-{% if ogrenciler %}
+
+
+{% if ogretmen %}
+
+
 
 <div class="d-flex flex-column justify-content-center align-items-center mt-5">
- <div style="width:70%;">
-    <center><h1>Kayitli Ogrenciler</h1></center>
+    <div style="width:70%;">
+    <center><h1>Kullanici Hesap Detaylari</h1></center>
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                    <th>Ogrenci Id</th>
-                    <th>Ogrenci Adi</th>
+                    <th>Ogretmen Id</th>
+                    <th>Ogretmen Adi</th>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Verilecek Ucret</th>
                     <th>Telefon</th>
                     <th>Adres</th>
-                    <th>Kredi</th>
+                    
             </tr>
         </thead>
         <tbody>
-           {% for ogrenci in ogrenciler %}
+           
                     <tr>
                         <td>
-                            {{ ogrenci.getOgrenciId() }}
+                            {{ ogretmen.getOgretmenId() }}
                             
                         </td>
                         <td>
-                            {{ ogrenci.getOgrenciAdi() }}
+                            {{ ogretmen.getOgretmenAdi() }}
                         </td>
                         <td>
-                            {{ ogrenci.username }}
+                            {{ ogretmen.username }}
                         </td>
                         <td>
-                            {{ ogrenci.email }}
+                            {{ ogretmen.email }}
                         </td>
                     
                         <td>
-                            {{ ogrenci.telefon }}
+                            {{ ogretmen.getVerilecekUcret() }}
                         </td>
                         <td>
-                            {{ ogrenci.adres }}
+                            {{ ogretmen.telefon }}
                         </td>
                         <td>
-                            {{ ogrenci.kredi }}
+                            {{ ogretmen.adres }}
                         </td>
                         
                     </tr>
-                {% endfor %}
+                
         </tbody>
         <tfoot>
-            <tr>
-                <th>Ogrenci Id</th>
-                    <th>Ogrenci Adi</th>
+             <tr>
+                    <th>Ogretmen Id</th>
+                    <th>Ogretmen Adi</th>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Verilecek Ucret</th>
                     <th>Telefon</th>
                     <th>Adres</th>
-                    <th>Kredi</th>
+                    
             </tr>
         </tfoot>
     </table>
@@ -92,12 +98,12 @@ $(document).ready(function() {
 </script>
 
 
+
+
+
+
 {% endif %}
 
 
 {% endblock %}
-{% block script  %}
 
-    
-
-{% endblock %}

@@ -54,9 +54,15 @@ class DersKatologu
      */
     private $ogretmen;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=OgrenciDetay::class, inversedBy="alinanDersListesi")
+     */
+    private $ogrenci;
+
     public function __construct()
     {
         $this->ogretmen = new ArrayCollection();
+        $this->ogrenci = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -144,10 +150,10 @@ class DersKatologu
         return $this->ogretmen;
     }
 
-    public function addOgretman(ogretmenDetay $ogretman): self
+    public function addOgretman(ogretmenDetay $ogretmen): self
     {
-        if (!$this->ogretmen->contains($ogretman)) {
-            $this->ogretmen[] = $ogretman;
+        if (!$this->ogretmen->contains($ogretmen)) {
+            $this->ogretmen[] = $ogretmen;
         }
 
         return $this;
@@ -156,6 +162,30 @@ class DersKatologu
     public function removeOgretman(ogretmenDetay $ogretman): self
     {
         $this->ogretmen->removeElement($ogretman);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OgrenciDetay[]
+     */
+    public function getOgrenci(): Collection
+    {
+        return $this->ogrenci;
+    }
+
+    public function addOgrenci(OgrenciDetay $ogrenci): self
+    {
+        if (!$this->ogrenci->contains($ogrenci)) {
+            $this->ogrenci[] = $ogrenci;
+        }
+
+        return $this;
+    }
+
+    public function removeOgrenci(OgrenciDetay $ogrenci): self
+    {
+        $this->ogrenci->removeElement($ogrenci);
 
         return $this;
     }

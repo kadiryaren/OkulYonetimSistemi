@@ -18,7 +18,7 @@ class UserFixtures extends Fixture
             $faker = Factory::create();
             $user = new User();
             $ogrenci = new OgrenciDetay();
-            $user->setUsername($faker->firstName);
+            $user->setUsername($faker->firstName.$i);
             $user->setPassword('$2y$13$M/6KU9dyjGNUqVvMlu2S0eDYesXpEd6UqJwIDAiM24I.9oYT7PFrO');
             $user->setEmail($faker->email);
             $user->setRoles(["ROLE_OGRENCI"]);

@@ -14,10 +14,11 @@ class OgretmenFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         for($i = 0; $i < 20; $i++){
+            sleep(0.5);
             $faker2 = Factory::create();
             $user = new User();
             $ogretmen = new OgretmenDetay();
-            $user->setUsername($faker2->firstName);
+            $user->setUsername($faker2->firstName.$i);
             $user->setPassword('$2y$13$M/6KU9dyjGNUqVvMlu2S0eDYesXpEd6UqJwIDAiM24I.9oYT7PFrO');
             $user->setEmail($faker2->email);
             $user->setRoles(["ROLE_OGRETMEN"]);

@@ -1,0 +1,203 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: #4F5D75 !important;
+}
+@media (hover: hover) {
+    .main{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .navbar{
+        display: flex !important;
+        align-self: flex-start;
+        width: 20vw !important;
+       
+        background-color: #4F5D75 !important;
+        padding: 0 !important;
+       
+        
+    }
+    #navbarTogglerDemo01{
+        width: 100% !important;
+        min-width: 250px !important;
+        height: 100vh !important;
+        background-color: #2D3142 !important;
+        
+        flex-direction: column !important;
+        justify-content: flex-start;
+      
+        
+    }
+    .kapsayici-div{
+        width: 100%;
+        height: auto;
+    
+    }.nav-header{
+        width: 15vw !important;
+        height: 10vw !important;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: #4F5D75!important;
+        border-radius: 10px;
+    }
+    .username-field{
+       
+        font-family: 'Dosis', sans-serif !important;
+        color: white;
+        font-size:3vw;
+    }
+    .yetki{
+        color: white  !important;
+        margin-right: 10px;
+        font-size: 30px;
+    }
+    .yetki-kapsayici{
+        
+        transform: scale(0.70);
+    }
+    .route, .cikis{
+        width: 80% !important;
+        height: 7vh !important;
+        background-color: #4F5D75!important;
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 1.5vw;
+    }
+    
+    .cikis{
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+       
+        background-color: #D7263D !important;
+    }
+    .duyurular-container{
+        align-self: flex-start;
+        width: 100%;
+        height: auto;
+        margin-bottom: 30px !important;
+        margin-top: 50px;
+    }
+    .duyuru-baslik{
+        width: 40% !important;
+        height: 5vw !important;
+        background-color: #EF8354 !important;
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 30px;
+    }
+    .duyuru-item{
+        width: 80% !important;
+        height: auto !important;
+        background-color: #2D3142 !important;
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 18px;
+        padding: 15px;
+    }
+    a{
+        text-decoration: none;
+        color: white !important;
+    }
+    
+}
+
+
+
+@media (hover: none) {
+    .main{
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .navbar{
+        display: flex !important;
+        background-color: #2D3142 !important;
+        padding: 0 !important;
+        
+    }
+    #navbarTogglerDemo01{
+        width: 100vw !important;
+        background-color: #2D3142 !important;
+        border-radius: 10px;
+    }
+    .kapsayici-div{
+        width: 100%;
+        height: auto;
+
+    }.nav-header{
+        width: 80% !important;
+        height: 20vh !important;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: #4F5D75!important;
+        border-radius: 10px;
+    }
+    .username-field{
+       
+        font-family: 'Dosis', sans-serif !important;
+        color: white;
+        font-size: 40px;
+    }
+    .route, .cikis{
+        width: 80% !important;
+        height: 15vw !important;
+        background-color: #4F5D75!important;
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 25px;
+    }
+    
+    .cikis{
+        position: relative;
+        bottom: 10px !important;
+        left: 10vw !important;
+        background-color: #D7263D !important;
+    }
+    a{
+        text-decoration: none !important;
+        color: white !important;
+    }
+    .duyurular-container{
+        width: 100vw;
+        height: auto;
+        margin-bottom: 30px !important;
+        align-self: flex-end !important;
+        
+    }
+    .duyuru-baslik{
+        width: 60vw !important;
+        height: 10vw !important;
+        background-color: #EF8354 !important;
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 25px;
+    }
+    .duyuru-item{
+        width: 80vw !important;
+        height: auto !important;
+        background-color: #2D3142 !important;
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 18px;
+        padding: 15px;
+    }
+
+
+}

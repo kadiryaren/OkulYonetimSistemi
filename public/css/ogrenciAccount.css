@@ -1,0 +1,232 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: #4F5D75 !important;
+}
+@media (hover: hover) {
+    .main{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .navbar{
+        display: flex !important;
+        align-self: flex-start;
+        width: 20vw !important;
+        background-color: #4F5D75 !important;
+        padding: 0 !important;
+        
+       
+    
+    }
+    #navbarTogglerDemo01{
+        width: 100% !important;
+        background-color: #2D3142 !important;
+        
+    }
+    .kapsayici-div{
+        width: 100%;
+        height: auto;
+    
+    }.nav-header{
+        width: 90% !important;
+        height: 20vh !important;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: #4F5D75!important;
+        border-radius: 10px;
+    }
+    .username-field{
+       
+        font-family: 'Dosis', sans-serif !important;
+        color: white;
+        font-size:3vw;
+    }
+    .yetki{
+        color: white  !important;
+        margin-right: 10px;
+        font-size: 20px;
+    }
+    .yetki-kapsayici{
+        
+        transform: scale(0.70);
+    }
+    .route{
+        width: 80% !important;
+        height: 7vh !important;
+        background-color: #4F5D75!important;
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 1.5vw;
+    }
+    .ayarlar, .cikis{
+        width: 80% !important;
+        height: 7vh !important;
+       
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 20px;
+    }
+    .ayarlar{
+        background-color: #EF8354!important;
+    }
+    .cikis{
+        background-color: #D7263D !important;
+    }
+    .duyurular-container{
+        align-self: flex-start;
+        width: 100%;
+        height: auto;
+        margin-bottom: 30px !important;
+        margin-top: 50px;
+    }
+    .duyuru-baslik{
+        width: 60% !important;
+        height: 10vw !important;
+        background-color: #EF8354 !important;
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 25px;
+    }
+    .duyuru-item{
+        width: 80% !important;
+        height: auto !important;
+        background-color: #2D3142 !important;
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 18px;
+        padding: 15px;
+    }
+}
+
+@media (hover: hover) and (max-width: 580px){
+    #navbarTogglerDemo01{
+        position: absolute;
+        top: 40px;
+        left: 0px;
+        width:  40vw !important;
+        background-color: #2D3142 !important;
+        z-index: 1;
+        border-radius: 10px;
+        border: 1px solid white;
+        -webkit-box-shadow: 5px 5px 15px -5px #fff; 
+        box-shadow: 5px 5px 15px -5px #fff;
+        
+    }
+    .route{
+        width: 80% !important;
+        height: 7vh !important;
+        background-color: #4F5D75!important;
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 3vw;
+    }
+
+}
+
+
+
+
+@media (hover: none) {
+    .main{
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .navbar{
+        display: flex !important;
+        background-color: #2D3142 !important;
+        padding: 0 !important;
+    }
+    #navbarTogglerDemo01{
+        width: 100vw !important;
+        background-color: #2D3142 !important;
+        border-radius: 10px;
+    }
+    .kapsayici-div{
+        width: 100%;
+        height: auto;
+
+    }.nav-header{
+        width: 80% !important;
+        height: 20vh !important;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: #4F5D75!important;
+        border-radius: 10px;
+    }
+    .username-field{
+       
+        font-family: 'Dosis', sans-serif !important;
+        color: white;
+        font-size: 40px;
+    }
+    .route{
+        width: 80% !important;
+        height: 15vw !important;
+        background-color: #4F5D75!important;
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 25px;
+    }
+    .ayarlar, .cikis{
+        width: 80% !important;
+        height: 15vw !important;
+       
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 25px;
+    }
+    .ayarlar{
+        background-color: #EF8354!important;
+    }
+    .cikis{
+        background-color: #D7263D !important;
+    }
+    .duyurular-container{
+        width: 100vw;
+        height: auto;
+        margin-bottom: 30px !important;
+        align-self: flex-end !important;
+        
+    }
+    .duyuru-baslik{
+        width: 60vw !important;
+        height: 10vw !important;
+        background-color: #EF8354 !important;
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 25px;
+    }
+    .duyuru-item{
+        width: 80vw !important;
+        height: auto !important;
+        background-color: #2D3142 !important;
+        margin-top: 20px;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Dosis', sans-serif !important;
+        font-size: 18px;
+        padding: 15px;
+    }
+
+
+}

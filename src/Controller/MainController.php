@@ -77,7 +77,9 @@ class MainController extends AbstractController
      */
     public function ogrenci_main_page(): Response
     {
-        return $this->render('main_pages/ogrenciMain.html.twig', []);
+        return $this->render('main_pages/ogrenciMain.html.twig', [
+            "user" => $this->getUser()
+        ]);
     }
 
     /**
@@ -85,8 +87,10 @@ class MainController extends AbstractController
      */
     public function ogretmen_main_page(): Response
     {
-        dump($this->getDoctrine()->getRepository(DersKatologu::class)->find(3)->getOgretmen());
-        return $this->render('main_pages/ogretmenMain.html.twig', []);
+       
+        return $this->render('main_pages/ogretmenMain.html.twig', [
+            "user" => $this->getUser()
+        ]);
     }
 
     /**
@@ -187,11 +191,12 @@ class MainController extends AbstractController
         @$ogretmen = $this->getDoctrine()->getRepository(OgretmenDetay::class)->findOneBy(["ogretmenId" => $this->getUser()->getId()]);
         
         $ogrenci = $this->getDoctrine()->getRepository(OgrenciDetay::class)->findOneBy(["ogrenci_id" => $this->getUser()->getId()]);
-        dump($ogrenci);
+        
         return $this->render('main/dersleriGor.html.twig', [
             'dersler' => $dersler,
             'ogretmen' => @$ogretmen,
-            'ogrenci' => @$ogrenci
+            'ogrenci' => @$ogrenci,
+            "user" => $this->getUser()
         ]);
     }
     /**
@@ -321,7 +326,8 @@ class MainController extends AbstractController
         $ogrenciId = $this->getUser()->getId();
         $ogrenciDetay = $this->getDoctrine()->getRepository(OgrenciDetay::class)->findOneBy(["ogrenci_id" => $ogrenciId]);
         return $this->render('main/ogrenciAccount.html.twig', [
-            'ogrenci' => $ogrenciDetay
+            'ogrenci' => $ogrenciDetay,
+            "user" => $this->getUser()
         ]);
     }
 

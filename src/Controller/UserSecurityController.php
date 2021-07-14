@@ -88,18 +88,19 @@ class UserSecurityController extends AbstractController
             $em->flush();
 
             return $this->redirectToRoute('root');
-            
         }
         
-        
-
-        
-
         return $this->render('register/index.html.twig', [
             'form' => $form->createView(),
             'title' => "Ogrenci Kayit Formu"
         ]);
     }
+
+
+
+
+
+
     /**
      * @Route("/yonetici/ogretmen-kayit", name="ogretmen.kayit")
      */
@@ -141,8 +142,6 @@ class UserSecurityController extends AbstractController
             $ogretmen->setOgretmenAdi($user->getId());
             $em->persist($ogretmen);
             $em->flush();
-
-
         }
     
         return $this->render('register/index.html.twig', [
@@ -150,6 +149,9 @@ class UserSecurityController extends AbstractController
             'title' => "Ogretmen Kayit Formu"
         ]);
     }
+
+
+
     
     /**
      * @Route("/yonetici/yonetici-kayit", name="yonetici.kayit")
@@ -193,8 +195,6 @@ class UserSecurityController extends AbstractController
             $yonetici->setYoneticiId($user->getId());
             $em->persist($yonetici);
             $em->flush();
-
-
         }
     
         return $this->render('register/index.html.twig', [
@@ -203,7 +203,4 @@ class UserSecurityController extends AbstractController
         ]);
     }
 
-    
-    
-    
 }

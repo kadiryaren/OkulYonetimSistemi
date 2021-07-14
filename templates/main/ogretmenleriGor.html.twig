@@ -9,6 +9,22 @@
         body{
             background-color: white !important;
         }
+        @media (hover: hover){
+            .table-size{
+                width: 90% !important;
+            }
+            .title{
+                font-size: 40px;
+            }
+        }
+        @media (hover: none){
+            .table-size{
+                width: 90vw !important;
+            }
+            .title{
+                font-size: 8vw;
+            }
+        }
 
     </style>
 
@@ -88,8 +104,9 @@
     
         <div class="duyurular-container d-flex flex-column justify-content-center align-items-center">
             <div class="d-flex flex-column justify-content-center align-items-center mt-5">
-            <div style="width:90%;">
-            <center><h1>Kayitli Ogretmenler</h1></center>
+            <div class="table-size">
+                <div class="text-center title" style="font-size:;">Kayitli Ogretmenler</div>
+                <br>
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
@@ -151,8 +168,19 @@
         <script>
 
         $(document).ready(function() {
-            $('#example').DataTable();
+            if($(document).width() / $(document).height() < 1 ){
+                var table = $('#example').DataTable( {
+                responsive: true
+            });
+
+            }else{
+                var table = $('#example').DataTable();
+            }
+            
         } );
+
+    
+       
         </script>
 
                 

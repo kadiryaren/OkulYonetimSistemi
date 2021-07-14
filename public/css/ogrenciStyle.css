@@ -106,6 +106,9 @@ body{
         text-decoration: none;
         color: white !important;
     }
+    .table-size{
+        width: 90% !important;
+    }
     
 }
 
@@ -194,6 +197,9 @@ body{
         font-family: 'Dosis', sans-serif !important;
         font-size: 18px;
         padding: 15px;
+    }
+    .table-size{
+        width: 90vw !important;
     }
 
 

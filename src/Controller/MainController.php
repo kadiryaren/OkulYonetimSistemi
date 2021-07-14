@@ -20,7 +20,6 @@ use Faker\Factory;
 class MainController extends AbstractController
 {
 
-
     /**
      * @Route("/load", name="load")
      */
@@ -28,6 +27,7 @@ class MainController extends AbstractController
     {
 
         $em = $this->getDoctrine()->getManager();
+
         $ogretmen = $this->getDoctrine()->getRepository(OgretmenDetay::class)->find(64);
         $ders = $this->getDoctrine()->getRepository(DersKatologu::class)->find(3);
         
@@ -35,9 +35,10 @@ class MainController extends AbstractController
         $em->persist($ders);
         $em->flush();
         
-        dump($ders->getOgretmen());
         return $this->render('main/root.html.twig', []);
     }
+
+
 
 
     /**
@@ -45,9 +46,11 @@ class MainController extends AbstractController
      */
     public function root(): Response
     {
-
         return $this->render('main/root.html.twig', []);
     }
+
+
+
     /**
      * @Route("/sistem-hakkinda", name="sistem.hakkinda")
      */
@@ -55,6 +58,8 @@ class MainController extends AbstractController
     {
         return $this->render('main/sistem.html.twig', []);
     }
+
+
 
     
 
@@ -74,10 +79,12 @@ class MainController extends AbstractController
             return $this->redirectToRoute('yonetici-main');
         }
 
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'abc'
-        ]);
+        return $this->redirectToRoute("root");
     }
+
+
+
+
 
     /**
      * @Route("/ogrenci", name="ogrenci-main")
@@ -88,6 +95,9 @@ class MainController extends AbstractController
             "user" => $this->getUser()
         ]);
     }
+
+
+
 
     /**
      * @Route("/ogretmen", name="ogretmen-main")
@@ -100,6 +110,7 @@ class MainController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/yonetici", name="yonetici-main")
      */
@@ -111,16 +122,7 @@ class MainController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/yonetici/yonetici-istatistikler", name="yonetici.istatistikler")
-     */
-    public function yoneticiIstatistikler(): Response
-    {
-       
-        return $this->render('main/yoneticiIstatistik.html.twig',[
 
-        ]);
-    }
 
     /**
      * @Route("/yonetici/ogrencileri-gor", name="yonetici.ogrencileri.gor")
@@ -136,6 +138,10 @@ class MainController extends AbstractController
         ]);
     }
 
+
+
+
+
     /**
      * @Route("/yonetici/ogretmenleri-gor", name="ogretmenleri.gor")
      */
@@ -148,6 +154,10 @@ class MainController extends AbstractController
         ]);
     }
 
+
+
+
+
     /**
      * @Route("/yonetici/yoneticileri-gor", name="yoneticileri.gor")
      */
@@ -158,6 +168,11 @@ class MainController extends AbstractController
             'yoneticiler' => $tum_yoneticiler
         ]);
     }
+
+
+
+
+
 
     /**
      * @Route("/yonetici/ders-ekle", name="ders.ekle")
@@ -189,6 +204,12 @@ class MainController extends AbstractController
             'title' => "Ders Ekleme Formu"
         ]);
     }
+
+
+
+
+
+
     /**
      * @Route("/yonetici/ders-sil/{dersid}", name="yonetici.ders-sil")
      */
@@ -203,6 +224,11 @@ class MainController extends AbstractController
         );
         return $this->redirectToRoute("yonetici.dersleri.gor");
     }
+
+
+
+
+
     
     /**
      * @Route("/yonetici/dersleri-gor", name="yonetici.dersleri.gor")
@@ -223,6 +249,9 @@ class MainController extends AbstractController
             "user" => $this->getUser()
         ]);
     }
+
+
+
     /**
      * @Route("/ogretmen/dersten-ayril/{id}", name="ogretmen.derstenAyril")
      */
@@ -254,10 +283,12 @@ class MainController extends AbstractController
         }else{
             return $this->redirectToRoute("ogretmen.dersleri.gor");
         }
-        
-        
-        
     }
+
+
+
+
+
     /**
      * @Route("ogrenci/dersten-ayril/{dersid}", name="ogrenci.dersten-ayril")
      */
@@ -272,6 +303,9 @@ class MainController extends AbstractController
 
         return $this->redirectToRoute("ogrenci.dersleri.gor");
     }
+
+
+
 
     /**
      * @Route("ogrenci/derse-katil/{dersid}", name="ogrenci.derse-katil")
@@ -288,12 +322,11 @@ class MainController extends AbstractController
             $em->persist($ogrencimiz);
             $em->flush();
         }
-        
-        
-       
-
         return $this->redirectToRoute("ogrenci.dersleri.gor");
     }
+
+
+
     /**
      * @Route("/ogretmen/derste-katil/{id}", name="ogretmen.derseKatil")
      */
@@ -314,9 +347,11 @@ class MainController extends AbstractController
             return $this->redirectToRoute("ogretmen.dersleri.gor");
         }
         
-        
-        
     }
+
+
+
+
     /**
      * @Route("/yonetici/account", name="yonetici.account")
      */
@@ -329,6 +364,9 @@ class MainController extends AbstractController
             "user" => $this->getUser()
         ]);
     }
+
+
+
 
     /**
      * @Route("/ogretmen/account", name="ogretmen.account")
@@ -344,6 +382,7 @@ class MainController extends AbstractController
     }
 
 
+
     /**
      * @Route("/ogrenci/account", name="ogrenci.account")
      */
@@ -356,6 +395,8 @@ class MainController extends AbstractController
             "user" => $this->getUser()
         ]);
     }
+
+
 
 
     /**
@@ -373,11 +414,4 @@ class MainController extends AbstractController
         ]);
     }
 
-
-    
-
-
-    
-    
-    
 }

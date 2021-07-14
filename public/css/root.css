@@ -1,0 +1,101 @@
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: #4F5D75 !important;
+}
+
+
+.item1{
+    width: 50%;
+    height: 20vh;
+    border-radius: 10px;
+    background-color: #2D3142;
+    text-align: center;
+}
+.header1, .header2{
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+.header1{
+    font-size: 45px;
+}
+.header2{
+    font-size: 40px;
+}
+.giris-yap{
+    width: 20%;
+    height: 8vh;
+    
+    background-color: #2D3142;
+    color: white;
+    border-radius: 5px;
+    font-size: 30px;
+}
+.sistem-hakkinda{
+    width: 25%;
+    height: 8vh;
+    background-color: #2D3142;
+    color: white;
+    border-radius: 5px;
+    font-size: 25px;
+}
+a{
+    text-decoration: none !important;
+    color: white !important;
+}
+a:visited{
+    text-decoration: none !important;
+    color: white !important;
+    
+}
+a:hover{
+    text-decoration: none !important;
+    color: rgb(153, 153, 153) !important;
+    
+}
+
+@media (pointer:coarse) {
+    
+    .item1{
+        width: 90%;
+        height: 25vh;
+        border-radius: 10px;
+        background-color: #2D3142;
+        text-align: center;
+    }
+    .header1, .header2{
+        color: white;
+        font-family: 'Roboto', sans-serif;
+    }
+    .header1{
+        font-size: 45px;
+    }
+    .header2{
+        font-size: 40px;
+    }
+    .giris-yap{
+        width: 60%;
+        height: 10vh;
+        
+        background-color: #2D3142;
+        color: white;
+        border-radius: 5px;
+        font-size: 30px;
+    }
+    .sistem-hakkinda{
+        width: 80%;
+        height: 10vh;
+        background-color: #2D3142;
+        color: white;
+        border-radius: 5px;
+        font-size: 25px;
+    }
+    a{
+        text-decoration: none;
+        color: white !important;
+    }
+}

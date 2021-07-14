@@ -1,0 +1,41 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: #4F5D75 !important ;
+}
+
+.item1{
+    width: 60vw;
+    height: 20vh;
+    background-color: #2D3142 !important ;
+    color: white !important;
+    border-radius: 10px;
+    font-size: 40px;
+    font-family: 'Josefin Sans', sans-serif !important;
+}
+.item2-p{
+    color: white !important;
+    font-size: 25px !important;
+}
+
+@media (pointer:coarse) {
+
+    .item1{
+        width: 80vw;
+        height: 15vh;
+        background-color: #2D3142 !important ;
+        font-family: 'Josefin Sans', sans-serif !important;
+        color: white;
+        font-size: 35px;
+        border-radius: 10px;
+    }
+   .item2-p{
+       color: white;
+       font-size: 25px;
+   }
+
+
+
+}

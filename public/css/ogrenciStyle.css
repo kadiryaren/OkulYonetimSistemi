@@ -23,7 +23,7 @@ body{
     #navbarTogglerDemo01{
         width: 100% !important;
         min-width: 250px !important;
-        height: 100vh !important;
+        height: auto !important;
         background-color: #2D3142 !important;
         
         flex-direction: column !important;
@@ -70,10 +70,8 @@ body{
     }
     
     .cikis{
-        position: absolute;
+        position: relative;
         bottom: 20px;
-        left: 20px;
-       
         background-color: #D7263D !important;
     }
     .duyurular-container{

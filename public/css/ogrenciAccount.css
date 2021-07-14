@@ -154,6 +154,8 @@ body{
         width: 100vw !important;
         background-color: #2D3142 !important;
         border-radius: 10px;
+        height: 100vh !important;
+        
     }
     .kapsayici-div{
         width: 100%;

@@ -48,6 +48,13 @@ class MainController extends AbstractController
 
         return $this->render('main/root.html.twig', []);
     }
+    /**
+     * @Route("/sistem-hakkinda", name="sistem.hakkinda")
+     */
+    public function sistemHakkinda(): Response
+    {
+        return $this->render('main/sistem.html.twig', []);
+    }
 
     
 
@@ -99,7 +106,9 @@ class MainController extends AbstractController
     public function yonetici_main_page(): Response
     {
         
-        return $this->render('main_pages/yoneticiMain.html.twig', []);
+        return $this->render('main_pages/yoneticiMain.html.twig', [
+            "user" => $this->getUser()
+        ]);
     }
 
     /**
@@ -121,12 +130,9 @@ class MainController extends AbstractController
     {   
         $tum_ogrenciler = $this->getDoctrine()->getRepository(OgrenciDetay::class)->findAll();
         
-        $faker = Factory::create();
-
-        
-        
         return $this->render('main/ogrencileriGor.html.twig', [
             'ogrenciler' => $tum_ogrenciler,
+            "user" => $this->getUser()
         ]);
     }
 
@@ -137,7 +143,8 @@ class MainController extends AbstractController
     {
         $tum_ogretmenler = $this->getDoctrine()->getRepository(OgretmenDetay::class)->findAll();
         return $this->render('main/ogretmenleriGor.html.twig', [
-            'ogretmenler' => $tum_ogretmenler
+            'ogretmenler' => $tum_ogretmenler,
+            "user" => $this->getUser()
         ]);
     }
 
@@ -170,6 +177,9 @@ class MainController extends AbstractController
             $ders->setDersGunu($form->get('dersGunu')->getData());
             $em->persist($ders);
             $em->flush();
+            $this->addFlash(
+                'kayit.basarili', 'Kayit basarili' 
+            );
 
         }
 
@@ -178,6 +188,20 @@ class MainController extends AbstractController
             'form' => $form->createView(),
             'title' => "Ders Ekleme Formu"
         ]);
+    }
+    /**
+     * @Route("/yonetici/ders-sil/{dersid}", name="yonetici.ders-sil")
+     */
+    public function dersSil($dersid): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $ders = $this->getDoctrine()->getRepository(DersKatologu::class)->find($dersid);
+        $em->remove($ders);
+        $em->flush();
+        $this->addFlash(
+            "ders-sil","Ders Silindi"
+        );
+        return $this->redirectToRoute("yonetici.dersleri.gor");
     }
     
     /**
@@ -301,7 +325,8 @@ class MainController extends AbstractController
         $yonetici_id = $this->getUser()->getId();
         $yonetciDetay = $this->getDoctrine()->getRepository(YoneticiDetay::class)->findOneBy(["yoneticiId" => $yonetici_id]);
         return $this->render('main/yoneticiAccount.html.twig', [
-            'yonetici' => $yonetciDetay
+            'yonetici' => $yonetciDetay,
+            "user" => $this->getUser()
         ]);
     }
 
@@ -313,7 +338,8 @@ class MainController extends AbstractController
         $ogretmen_id = $this->getUser()->getId();
         $ogretmenDetay = $this->getDoctrine()->getRepository(OgretmenDetay::class)->findOneBy(["ogretmenId" => $ogretmen_id]);
         return $this->render('main/ogretmenAccount.html.twig', [
-            'ogretmen' => $ogretmenDetay
+            'ogretmen' => $ogretmenDetay,
+            "user" => $this->getUser()
         ]);
     }
 

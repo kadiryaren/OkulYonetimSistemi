@@ -15,6 +15,12 @@
         body{
             background-color: white !important;
         }
+        {% if is_granted("ROLE_OGRETMEN") and is_granted('ROLE_OGRENCI') %}
+            #navbarTogglerDemo01{
+                        height: 100vh !important;
+                    }
+        {% endif %}
+        
 
     </style>
 
@@ -66,12 +72,32 @@
                             <a  href="{{ path('ogretmen.dersleri.gor') }}">Dersleri Gor</a>
                         </div>
                     {% endif %}
-                    {% if is_granted("ROLE_YONETICI") %}
-                        <div class="route d-flex justify-content-center align-items-center">
+                    {% if is_granted("ROLE_YONETICI") %}<div class="route d-flex justify-content-center align-items-center">
                             <a href="{{ path('yonetici.account') }}">Kullanici Bilgileri</a>
                         </div>
                         <div class="route d-flex justify-content-center align-items-center">
+                            <a  href="{{ path('yonetici.ogrencileri.gor') }}">Ogrencileri Gor</a>
+                        </div>
+                         <div class="route d-flex justify-content-center align-items-center">
+                            <a  href="{{ path('ogrenci-kayit') }}">Ogrenci Kayit</a>
+                        </div>
+                        <div class="route d-flex justify-content-center align-items-center">
+                            <a href="{{ path('ogretmenleri.gor') }}">Ogretmenleri Gor</a>
+                        </div>
+                        <div class="route d-flex justify-content-center align-items-center">
+                            <a  href="{{ path('yoneticileri.gor') }}">Yoneticileri Gor</a>
+                        </div>
+                        <div class="route d-flex justify-content-center align-items-center">
                             <a  href="{{ path('yonetici.dersleri.gor') }}">Dersleri Gor</a>
+                        </div>
+                        <div class="route d-flex justify-content-center align-items-center">
+                            <a  href="{{ path('ders.ekle') }}">Ders Ekle</a>
+                        </div>
+                        <div class="route d-flex justify-content-center align-items-center">
+                            <a  href="{{ path('ogretmen.kayit') }}">Ogretmen Ekle</a>
+                        </div>
+                        <div class="route d-flex justify-content-center align-items-center">
+                            <a  href="{{ path('yonetici.kayit') }}">Yonetici Ekle</a>
                         </div>
                     {% endif %}
 
@@ -89,9 +115,14 @@
         </nav>
     
         <div class="duyurular-container d-flex flex-column justify-content-center align-items-center">
+        {% for message in app.flashes('ders-sil') %}
+            <div class="alert alert-danger text-center" style="width: 100%;">
+                {{ message }}
+            </div>
+        {% endfor %}
 
             <div class="d-flex flex-column justify-content-center align-items-center mt-5">
-                <div style="width:100%;">
+                <div style="width:90%;">
                 <center><h1>Kayitli Dersler</h1></center>
                 {% if is_granted("ROLE_OGRENCI") %}
                     <center><h3>Kalan Kredi {{ ogrenci.getKredi() }}</h3></center>
@@ -107,12 +138,11 @@
                                 <th>Hangi Sinifta Alinabilir</th>
                                 <th>Ders Kredisi</th>
                                 <th>Ders Gunu</th>
-                                {% if is_granted("ROLE_OGRETMEN") or is_granted("ROLE_OGRENCI") %}
-                                        <th>Egitmen</th>
-                                        <th>Ogrenciler</th>
-                                        <th>Ekle/Sil</th>
+                                <th>Egitmen</th>
+                                <th>Ogrenciler</th>
+                                <th>Ekle/Sil</th>
                                         
-                                {% endif %}
+                                
                                 
 
                                 
@@ -144,16 +174,45 @@
                                     <td>
                                         {{ ders.dersGunu|date("Y/m/d") }}
                                     </td>
-                                    
-                                    {% if is_granted("ROLE_OGRENCI") %}
+                                    {% if is_granted("ROLE_YONETICI") %}
                                         <td>
                                         {% for hoca in ders.getOgretmen() %}
                                             {% if hoca != ogretmen %}
-                                                ,{{ hoca.username }}
+                                                {{ hoca.username }}
                                             {% endif %}
                                             
                                         
                                         {% endfor %}
+                                        </td>
+                                        {% if ders.getOgrenci()|length > 0 %}
+                                            <td>
+                                                {% for forOgrenci in  ders.getOgrenci() %}
+                                                        
+                                                            {{ forOgrenci.username }}
+                                                {% endfor %}
+                                            </td>
+                                            {% else %}
+                                            <td>
+                                                Derse kayitli ogrenci yok!
+                                            </td>
+                                        {% endif %}
+                                        <td>
+                                            <a class="btn btn-danger"  href={{ path("yonetici.ders-sil",{dersid:ders.id}) }}>Sil</a>
+                                        </td>
+
+                                    {% endif %}
+                                    
+                                    {% if is_granted("ROLE_OGRENCI") %}
+                                        <td>
+                                        {% if  ders.getOgretmen()|length > 0 %}
+                                            {% for hoca in ders.getOgretmen() %}
+                                                {{ hoca.username }}
+                                            {% endfor %}
+
+                                        {% else %}
+                                            Egitmen Atanmadi!
+                                        {% endif %}
+                                        
                                         </td>
                                         {% if ogrenciderseAidiyetKontrol(ders.getOgrenci(),ogrenci) %}
                                             <td>
@@ -177,7 +236,7 @@
                                         <td>
                                             Derse kayitli ogrenci yok!
                                         </td>
-                                        {% endif %}
+                                    {% endif %}
 
 
                                     
@@ -186,7 +245,7 @@
                                         {% if  ogrenciderseAidiyetKontrol(ders.getOgrenci(),ogrenci) %}
                                             {# Ders Silme linki #}
                                             <td>
-                                            <a class="btn btn-sm btn-outline-danger" href="{{ path('ogrenci.dersten-ayril',{dersid:ders.getId()}) }}">Dersten Ayril</a>
+                                            <a class="btn btn-sm btn-danger" href="{{ path('ogrenci.dersten-ayril',{dersid:ders.getId()}) }}">Dersten Ayril</a>
                                             </td>
                                         {% else %}
                                             {# Ders Ekleme linki #}
@@ -194,7 +253,7 @@
                                             {% if not  ders.getOgretmen()|length > 0  %}
                                                 <h5><span class="badge badge-danger">Derse Katilamazsiniz!</span></h5>
                                                 {% else %}
-                                                <a class="btn btn-sm btn-outline-success" href="{{ path('ogrenci.derse-katil',{dersid:ders.getId()}) }}">Katil</a>
+                                                <a class="btn btn-sm btn-success" href="{{ path('ogrenci.derse-katil',{dersid:ders.getId()}) }}">Katil</a>
                                             {% endif %}
                                             
                                             </td>
@@ -212,7 +271,7 @@
                                                 <h5><span class="badge badge-warning">Siz</span></h5>
                                                 {% for hoca in ders.getOgretmen() %}
                                                     {% if hoca != ogretmen %}
-                                                        ,{{ hoca.username }}
+                                                        {{ hoca.username }}
                                                     {% endif %}
                                                     
                                                 {% endfor %}
@@ -221,7 +280,7 @@
                                                 <td>
                                                     {% for forOgrenci in  ders.getOgrenci() %}
                                                             
-                                                                ,{{ forOgrenci.username }}
+                                                                {{ forOgrenci.username }}
                                                     {% endfor %}
                                                 </td>
                                                 {% else %}
@@ -233,7 +292,7 @@
                                             
                                             <td>
                                                 <h4><span class="badge badge-info">Derse Aitsiniz</span></h4>
-                                                <a class="btn btn-sm btn-outline-dark" href="{{ path('ogretmen.derstenAyril',{id:ders.getId()}) }}">Dersten Ayril</a>
+                                                <a class="btn btn-sm btn-dark" href="{{ path('ogretmen.derstenAyril',{id:ders.getId()}) }}">Dersten Ayril</a>
                                             </td>
                                         
                                         {% else %}
@@ -246,7 +305,7 @@
                                                 <td>
                                                     {% for forOgrenci in  ders.getOgrenci() %}
                                                             
-                                                                ,{{ forOgrenci.username }}
+                                                                {{ forOgrenci.username }}
                                                     {% endfor %}
                                                 </td>
                                                 {% else %}
@@ -255,7 +314,7 @@
                                                 </td>
                                             {% endif %}
                                             <td>
-                                                <a class="btn btn-sm btn-outline-warning" href="{{ path('ogretmen.derseKatil',{id:ders.getId()}) }}">Derse Katil</a>
+                                                <a class="btn btn-sm btn-warning" href="{{ path('ogretmen.derseKatil',{id:ders.getId()}) }}">Derse Katil</a>
                                             </td>
                                         {% endif %}
                                         
@@ -277,11 +336,10 @@
                                 <th>Hangi Sinifta Alinabilir</th>
                                 <th>Ders Kredisi</th>
                                 <th>Ders Gunu</th>
-                                {% if is_granted("ROLE_OGRETMEN") or is_granted("ROLE_OGRENCI") %}
-                                        <th>Egitmen</th>
-                                        <th>Ogrenciler</th>
-                                        <th>Ekle/Sil</th>
-                                {% endif %}
+                                <th>Egitmen</th>
+                                <th>Ogrenciler</th>
+                                <th>Ekle/Sil</th>
+                                
                         </tr>
                     </tfoot>
                 </table>

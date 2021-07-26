@@ -12,7 +12,7 @@
         display: none;
     }
     .title{
-        height: 40px;
+        height: 5vh;
         background-color: #ee6c4d;
         color: white;
         font-size: 1.3em;
@@ -28,9 +28,9 @@
     .navbar{
         width: 15vw;
         height: auto;
-        min-height: 100vh;
+        min-height: 95vh;
         max-width: 300px;
-        min-width: 200px;
+        min-width: 250px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -39,8 +39,15 @@
         background-color: #98c1d9;
     }
     .navbar-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background-color: #3d5a80;
         color: white;
+        font-size: 1.2em;
+    }
+    .navbar-button:hover{
+        color: grey !important;
     }
     .userDetail{
         display: flex;
@@ -56,6 +63,7 @@
         color: white;
     }
     .username{
+        font-size: 2em;
         margin-top: 10px;
     }
     .content{
@@ -70,7 +78,12 @@
     }
     .navbar-button{
         width: 80%;
-        height: 40px ;
+        height: 60px ;
+    }
+    .cikis{
+        background-color: #881f1f !important;
+        margin-top: auto;
+        margin-bottom: 10px;
     }
 }
 
@@ -151,7 +164,7 @@
     }
     .navbar-button{
         width: 80%;
-        height: 40px ;
+        height: 40px;
     }
     
 }

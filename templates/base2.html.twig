@@ -51,13 +51,18 @@
                     <div class="big-container">
                         <nav class="navbar">
                             <div class="userDetail">
-                                <div class="username">  
-                                    {{ app.user.username  }} 
+                                <div class="username"> 
+                                 
+                                   {% if app.user  %}
+                                            {{ app.user.username  }}  
+                                    {% endif %}
                                 </div>
                                 <div class="yetki">
                                     <h4><span class="badge badge-warning">ogrenci</span></h4>
                                 </div>
                             </div>
+                            <a class="btn navbar-button" href="{{ path('ogrenci-main') }}">Duyurular</a>
+                            <br>
                             <a class="btn navbar-button" href="{{ path('ogrenci.account') }}">Kullanici Ayarlari</a>
                             <br>
                             <a class="btn navbar-button" href="{{ path('ogrenci.dersleri.gor')  }}">Dersler</a>
@@ -100,17 +105,30 @@
                         <nav class="navbar">
                             <div class="userDetail">
                                 <div class="username">  
-                                    {{ app.user.username  }} 
+                                    {% if app.user  %}
+                                            {{ app.user.username  }}  
+                                    {% endif %} 
                                 </div>
                                 <div class="yetki">
                                      <h4><span class="badge badge-warning">yonetici</span> </h4>
                                 </div>
                             </div>
-                            
+                            <a class="btn navbar-button" href="{{ path('yonetici-main') }}">Duyurular</a>
+                            <br>
                             <a class="btn navbar-button" href="{{ path('yonetici.dersleri.gor') }}">Dersler</a>
                             <br>
-                            <a class="btn navbar-button" href="">Kullanicilar</a>
-                            
+                            <a class="btn navbar-button" href="">Kullanicilar</a> 
+                            <br>
+
+                            <div>
+                                <a class="btn navbar-button" href="">Ogrenciler</a> 
+                                <br>
+                                <a class="btn navbar-button" href="">Ogretmenler</a> 
+                                <br>
+                                <a class="btn navbar-button" href="">Yoneticiler</a> 
+                                <br>
+
+                            </div>
                             
 
                             <a class="btn navbar-button cikis" href="{{ path('app_logout') }}">Cikis Yap</a>
@@ -149,12 +167,16 @@
                             <nav class="navbar">
                                 <div class="userDetail">
                                     <div class="username">  
-                                        {{ app.user.username  }}   
+                                        {% if app.user  %}
+                                            {{ app.user.username  }}  
+                                        {% endif %} 
                                     </div>
                                     <div class="yetki">
                                          <h4><span class="badge badge-warning">ogretmen</span> </h4>
                                     </div>
                                 </div>
+                                <a class="btn navbar-button" href="{{ path('ogretmen-main') }}">Duyurular</a>
+                            <br>
                                 <a class="btn navbar-button" href="{{ path('ogretmen.account') }}">Kullanici Ayarlari</a>
                                 <br>
                                 <a class="btn navbar-button" href="{{ path('ogretmen.dersleri.gor') }}">Dersler</a>
@@ -178,7 +200,49 @@
                                 }
                             }
                         </script>
-        
+            {% else %}
+
+             <div class="menu-button" onclick="degistir()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                                </svg>
+
+                            </div>
+                            <div class="title d-flex justify-content-center align-items-center">
+                                Ozel Okul Yonetim Sistemi
+                            </div>
+
+                        <div class="big-container">
+                            <nav class="navbar" style="display:none;">
+                                <div class="userDetail">
+                                    <div class="username">  
+
+                                    {% if app.user  %}
+                                            {{ app.user.username  }}  
+                                    {% endif %}
+                                         
+                                    </div>
+                                    <div class="yetki">
+                                         <h4><span class="badge badge-warning">ogretmen</span> </h4>
+                                    </div>
+                                </div>
+                                <a class="btn navbar-button" href="{{ path('ogretmen.account') }}">Kullanici Ayarlari</a>
+                                <br>
+                                <a class="btn navbar-button" href="{{ path('ogretmen.dersleri.gor') }}">Dersler</a>
+                                <a class="btn navbar-button cikis" href="{{ path('app_logout') }}">Cikis Yap</a>
+
+                                
+
+
+                            </nav>
+                            <div class="content">
+                                {% block body %}{% endblock %}
+                                
+                            </div>
+                        </div>
+
+                
+
             {% endif %}
     </body>
 </html>

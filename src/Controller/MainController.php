@@ -46,8 +46,8 @@ class MainController extends AbstractController
      */
     public function root(): Response
     {
-        // return $this->render('main/root.html.twig', []);
-        return $this->render('deneme123.html.twig', []);
+        return $this->render('main/root.html.twig', []);
+        
     }
 
 
@@ -92,9 +92,7 @@ class MainController extends AbstractController
      */
     public function ogrenci_main_page(): Response
     {
-        return $this->render('main_pages/ogrenciMain.html.twig', [
-            "user" => $this->getUser()
-        ]);
+        return $this->render('main/ogrenci.html.twig', []);
     }
 
 
@@ -106,9 +104,7 @@ class MainController extends AbstractController
     public function ogretmen_main_page(): Response
     {
        
-        return $this->render('main_pages/ogretmenMain.html.twig', [
-            "user" => $this->getUser()
-        ]);
+        return $this->render('main/ogretmen.html.twig', []);
     }
 
 
@@ -118,9 +114,7 @@ class MainController extends AbstractController
     public function yonetici_main_page(): Response
     {
         
-        return $this->render('main_pages/yoneticiMain.html.twig', [
-            "user" => $this->getUser()
-        ]);
+        return $this->render('main/yonetici.html.twig', []);
     }
 
 

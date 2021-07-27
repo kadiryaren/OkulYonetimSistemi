@@ -1,28 +1,21 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Root Page{% endblock %}
+{% extends "base2.html.twig" %}
 
 {% block body %}
+
 <link rel="stylesheet" href="{{ asset('css/root.css') }}" />
 
-
-     <div class="d-flex flex-column justify-content-center align-items-center mt-4">
-
-        <div class="item1 d-flex flex-column justify-content-center align-items-center">
-            <p class="header1">Ozel Okul</p>
-            <p class="header2">Yonetim Paneli</p>
-        </div>
-        <div class="giris-yap  d-flex justify-content-center align-items-center mt-4  ">
-            <a href="{{ path("app_login") }}">Giris Yap</a>
-        </div>
-        <div class="sistem-hakkinda d-flex justify-content-center align-items-center mt-4 ">
-            <a href="{{ path("sistem.hakkinda") }}">Sistem Hakkinda</a>
-        </div>
-    </div>
+<div class="navigation-div">
+<a href="{{ path('app_login') }}" class="btn btn-lg btn-outline-light ">Giris Yap</a>
+<a href="{{ path('sistem.hakkinda') }}" class="btn btn-lg btn-outline-light ">Sistem Hakkinda</a>
+</div>
 
 
 
 
 
 
+
+
+
+<script src="{{ asset('js/backgroundChanger.js') }}"></script>
 {% endblock %}

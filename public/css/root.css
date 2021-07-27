@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url("../photos/sinif.jpg");
+    background-position: cover;
+    transition: .3s ease;
+    background-repeat: no-repeat;
+}
+
+.title{
+    height: 10vh;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-size: 40px;
+}
+.navigation-div{
+    width: 100%;
+    min-width: 250px;
+    height: 20vh;
+    min-height: 250px;
+    margin-top: 20vh;
+    background-color: rgba(0, 0, 0, 0.575);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+
+}
+.btn{
+    transform: scale(1.5);
+}
+a{
+    margin: 50px;
+    color: rgb(182, 182, 182) !important;
+}

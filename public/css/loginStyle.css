@@ -1,0 +1,21 @@
+.nav-container{
+    width: 100%;
+    min-width: 250px;
+    height: 10vh;
+    min-height: 250px;
+    background-color: rgba(0, 0, 0, 0.753);
+}
+
+.form-control{
+    width:  40vw;
+    min-width: 250px;
+    max-width: 600px;
+    height: 50px;
+    margin: 10px;
+}
+.giris{
+    width: 150px;
+    height: 30px;
+    background-color: white;
+    border-radius: 10px;
+}

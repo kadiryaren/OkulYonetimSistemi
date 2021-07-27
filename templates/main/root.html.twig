@@ -1,0 +1,21 @@
+{% extends "base2.html.twig" %}
+
+{% block body %}
+
+<link rel="stylesheet" href="{{ asset('css/root.css') }}" />
+
+<div class="navigation-div">
+<a href="{{ path('app_login') }}" class="btn btn-lg btn-outline-light ">Giris Yap</a>
+<a href="{{ path('sistem.hakkinda') }}" class="btn btn-lg btn-outline-light ">Sistem Hakkinda</a>
+</div>
+
+
+
+
+
+
+
+
+
+<script src="{{ asset('js/backgroundChanger.js') }}"></script>
+{% endblock %}

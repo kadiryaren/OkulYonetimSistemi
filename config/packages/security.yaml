@@ -2,20 +2,30 @@ security:
     # https://symfony.com/doc/current/security/experimental_authenticators.html
     enable_authenticator_manager: true
     password_hashers:
+<<<<<<< HEAD
         App\Entity\DersKatologu:
             algorithm: auto
         App\Entity\Ogrenci:
             algorithm: auto
 
+=======
+        App\Entity\User:
+            algorithm: auto
+>>>>>>> main
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
+<<<<<<< HEAD
                 class: App\Entity\Ogrenci
                 property: username
         # used to reload user from session & other features (e.g. switch_user)
+=======
+                class: App\Entity\User
+                property: username
+>>>>>>> main
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -23,6 +33,14 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+<<<<<<< HEAD
+=======
+            custom_authenticator: App\Security\UserAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
+>>>>>>> main
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -33,5 +51,10 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/ogrenci, roles: ROLE_OGRENCI }
+        - { path: ^/ogretmen, roles: ROLE_OGRETMEN }
+        - { path: ^/yonetici, roles: ROLE_YONETICI }
+        
+        
+        - { path: ^/profile, roles: ROLE_USER }
+
